@@ -19,7 +19,7 @@ export function ImagePage({ image }: ImagePageProps) {
         <p>{image.description}</p>
         <img src={image.url} />
         <div>
-          <AddToCartButton />
+          <AddToCartButton id={image.id} />
         </div>
       </div>
     </>

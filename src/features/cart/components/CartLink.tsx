@@ -1,5 +1,13 @@
 import Link from "next/link";
 
+import { useCart } from "../api/getCart";
+
 export function CartLink() {
-  return <Link href="/me/cart">Cart</Link>;
+  const cartQuery = useCart();
+
+  if (!cartQuery.data) return <div></div>;
+
+  return (
+    <Link href="/me/cart">{`Cart (${cartQuery.data.results.length})`}</Link>
+  );
 }
