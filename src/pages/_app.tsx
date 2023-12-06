@@ -7,6 +7,7 @@ import { DM_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import { AnnouncementBanner } from "@/features/announcement";
 import { CartLink } from "@/features/cart";
+import { WishlistLink } from "@/features/wishlist";
 
 const appFont = DM_Sans({ subsets: ["latin"] });
 
@@ -48,7 +49,8 @@ function NavBar() {
         <span>Hamburger</span>
         <Link href="/">Logo</Link>
       </div>
-      <div>
+      <div className="flex gap-4">
+        <WishlistLink />
         <CartLink />
       </div>
     </div>
