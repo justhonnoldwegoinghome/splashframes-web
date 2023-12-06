@@ -1,5 +1,6 @@
+import _ from "lodash";
 import useSWRInfinite from "swr/infinite";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 import { get } from "@/utils/apiClient";
 import { APIList } from "@/types/api";
@@ -18,18 +19,29 @@ export function getImages({
   });
 }
 
-export function useImagesInfinite() {
-  const { data, size, setSize } = useSWRInfinite(getKey, (k) => getImages(k));
-  const [hasEnded, setHasEnded] = useState(false);
+// #1. size +1
+// #2. call `getKey`
+// #3. call `getImages`
 
-  useEffect(() => {
+export function useImagesInfinite() {
+  const { data, size, setSize } = useSWRInfinite(getKey, (k) => getImages(k), {
+    revalidateFirstPage: false, // issue 1401 but not needed for less dynamic apps like this
+  });
+
+  const hasEnded = useMemo(() => {
     if (data && data[data.length - 1].next_page_token === null) {
-      setHasEnded(true);
+      return true;
+    } else {
+      return false;
     }
   }, [data]);
 
   return {
-    data,
+    data: data
+      ? {
+          results: _.flatten(data.map((d) => d.results)),
+        }
+      : undefined,
     hasEnded,
     loadMore: () => setSize(size + 1),
   };
