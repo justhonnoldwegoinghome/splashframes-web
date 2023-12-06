@@ -1,15 +1,14 @@
-import { Image } from "@/features/images";
-
 import { useAddToCart } from "../api/addToCart";
+import { CartItem } from "../types";
 
 interface AddToCartButtonProps {
-  id: Image["id"];
+  cartItem: CartItem;
 }
 
-export function AddToCartButton({ id }: AddToCartButtonProps) {
+export function AddToCartButton({ cartItem }: AddToCartButtonProps) {
   const addToCartMutation = useAddToCart();
   return (
-    <button onClick={() => addToCartMutation.trigger({ id })}>
+    <button onClick={() => addToCartMutation.trigger(cartItem)}>
       Add to cart
     </button>
   );

@@ -1,10 +1,12 @@
 import useSWR from "swr";
 
-import { Image } from "@/features/images";
+import { APIList } from "@/types/api";
 
-export function getCart() {
+import { CartItem } from "../types";
+
+export function getCart(): APIList<CartItem> {
   const rawCart = localStorage.getItem("cart") || "[]";
-  const parsedCart = JSON.parse(rawCart) as Image["id"][];
+  const parsedCart = JSON.parse(rawCart) as CartItem[];
 
   return {
     next_page_token: null,

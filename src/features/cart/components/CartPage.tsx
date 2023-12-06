@@ -1,5 +1,4 @@
 import { useCart } from "../api/getCart";
-import { RemoveFromCartButton } from "./RemoveFromCartButton";
 
 export function CartPage() {
   const cartQuery = useCart();
@@ -10,10 +9,9 @@ export function CartPage() {
     <div>
       <h1>Cart page</h1>
       <div className="flex gap-4">
-        {cartQuery.data.results.map((id) => (
-          <div key={id} className="border">
-            <h2>{`Cart item id: ${id}`}</h2>
-            <RemoveFromCartButton id={id} />
+        {cartQuery.data.results.map((c) => (
+          <div key={c.id} className="border">
+            <h2>{`Cart item id: ${c.id}`}</h2>
           </div>
         ))}
       </div>

@@ -18,7 +18,7 @@ export function WishlistPage() {
 
             <div className="flex flex-col gap-4">
               <RemoveFromWishlistButton wishlistItem={w} />
-              <AddToCartButton id={w.id} />
+              <AddToCartButton cartItem={{ id: w.id, quantity: 1 }} />
             </div>
           </div>
         ))}
