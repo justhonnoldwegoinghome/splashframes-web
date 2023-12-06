@@ -7,21 +7,23 @@ import { DM_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import { AnnouncementBanner } from "@/features/announcement";
 import { CartLink } from "@/features/cart";
+import { WishlistLink } from "@/features/wishlist";
 
 const appFont = DM_Sans({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <div className="bg-white text-black">
-      <AnnouncementBanner />
-      <NavBar />
-      <div className={clsx(appFont.className, "max-w-screen-laptop mx-auto")}>
-        <div className="px-[3vw]">
-          <Component {...pageProps} />
-        </div>
-      </div>
-    </div>
-  );
+  return <div>Coming soon</div>;
+  // return (
+  //   <div className="bg-white text-black">
+  //     <AnnouncementBanner />
+  //     <NavBar />
+  //     <div className={clsx(appFont.className, "max-w-screen-laptop mx-auto")}>
+  //       <div className="px-[3vw]">
+  //         <Component {...pageProps} />
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 }
 
 function NavBar() {
@@ -48,7 +50,8 @@ function NavBar() {
         <span>Hamburger</span>
         <Link href="/">Logo</Link>
       </div>
-      <div>
+      <div className="flex gap-4">
+        <WishlistLink />
         <CartLink />
       </div>
     </div>

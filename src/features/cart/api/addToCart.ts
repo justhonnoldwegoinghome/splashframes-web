@@ -1,21 +1,27 @@
+import _ from "lodash";
 import useSWRMutation from "swr/mutation";
 
-import { Image } from "@/features/images";
-
 import { getCart } from "./getCart";
+import { CartItem } from "../types";
 
 interface AddToCartParams {
-  data: {
-    id: Image["id"];
-  };
+  data: CartItem;
 }
 
 function addToCart({ data }: AddToCartParams) {
-  const currentCart = getCart().results;
+  const cart = getCart().results;
 
-  if (!currentCart.includes(data.id)) {
-    const updatedCart = [...currentCart, data.id];
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  const isInCart = cart.map((c) => c.id).includes(data.id);
+
+  if (!isInCart) {
+    localStorage.setItem("cart", JSON.stringify([...cart, data]));
+  } else {
+    const idx = _.indexOf(
+      cart.map((c) => c.id),
+      data.id
+    );
+    cart[idx].quantity += data.quantity;
+    localStorage.setItem("cart", JSON.stringify(cart));
   }
   return data;
 }
