@@ -12,17 +12,18 @@ import { WishlistLink } from "@/features/wishlist";
 const appFont = DM_Sans({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <div className="bg-white text-black">
-      <AnnouncementBanner />
-      <NavBar />
-      <div className={clsx(appFont.className, "max-w-screen-laptop mx-auto")}>
-        <div className="px-[3vw]">
-          <Component {...pageProps} />
-        </div>
-      </div>
-    </div>
-  );
+  return <div>Coming soon</div>;
+  // return (
+  //   <div className="bg-white text-black">
+  //     <AnnouncementBanner />
+  //     <NavBar />
+  //     <div className={clsx(appFont.className, "max-w-screen-laptop mx-auto")}>
+  //       <div className="px-[3vw]">
+  //         <Component {...pageProps} />
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 }
 
 function NavBar() {
