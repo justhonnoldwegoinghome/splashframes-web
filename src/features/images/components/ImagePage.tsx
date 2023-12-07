@@ -17,7 +17,11 @@ export function ImagePage({ image }: ImagePageProps) {
       <div>
         <h1>{image.title}</h1>
         <p>{image.description}</p>
-        <img src={image.url} />
+        <div className="grid grid-cols-2 tablet:grid-cols-3 gap-2">
+          {image.urls.map((u) => (
+            <img key={u} src={u} className="object-cover" />
+          ))}
+        </div>
         <div>
           <AddToCartButton cartItem={{ id: image.id, quantity: 1 }} />
         </div>

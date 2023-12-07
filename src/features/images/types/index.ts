@@ -1,7 +1,7 @@
 export interface Image {
   id: string;
-  url: string;
-  tags: string[];
+  urls: [string, ...string[]];
+  tags: [string, ...string[]];
   orientation: "landscape" | "square" | "portrait";
   title: string;
   description: string;

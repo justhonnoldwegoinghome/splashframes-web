@@ -10,7 +10,7 @@ export function ImageCard({ image }: ImageCardProps) {
   return (
     <div>
       <Link href={`/images/${image.id}`}>
-        <img src={image.url} />
+        <img src={image.urls[0]} />
       </Link>
     </div>
   );
