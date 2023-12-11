@@ -10,8 +10,8 @@ export function CartPage() {
       <h1>Cart page</h1>
       <div className="flex gap-4">
         {cartQuery.data.results.map((c) => (
-          <div key={c.id} className="border">
-            <h2>{`Cart item id: ${c.id}`}</h2>
+          <div key={c.productId} className="border">
+            <h2>{`Cart item product id: ${c.productId}`}</h2>
           </div>
         ))}
       </div>

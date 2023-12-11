@@ -11,14 +11,14 @@ interface AddToCartParams {
 function addToCart({ data }: AddToCartParams) {
   const cart = getCart().results;
 
-  const isInCart = cart.map((c) => c.id).includes(data.id);
+  const isInCart = cart.map((c) => c.productId).includes(data.productId);
 
   if (!isInCart) {
     localStorage.setItem("cart", JSON.stringify([...cart, data]));
   } else {
     const idx = _.indexOf(
-      cart.map((c) => c.id),
-      data.id
+      cart.map((c) => c.productId),
+      data.productId
     );
     cart[idx].quantity += data.quantity;
     localStorage.setItem("cart", JSON.stringify(cart));

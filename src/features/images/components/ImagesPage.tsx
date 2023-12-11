@@ -51,10 +51,12 @@ export function ImagesPage() {
         {images.map((img, i) => (
           <div ref={i === images.length - 1 ? ref : undefined} key={img.id}>
             <ImageCard image={img} />
-            {wishlistQuery.data?.results.map((w) => w.id).includes(img.id) ? (
-              <RemoveFromWishlistButton wishlistItem={{ id: img.id }} />
+            {wishlistQuery.data?.results
+              .map((w) => w.imageId)
+              .includes(img.id) ? (
+              <RemoveFromWishlistButton wishlistItem={{ imageId: img.id }} />
             ) : (
-              <AddToWishlistButton wishlistItem={{ id: img.id }} />
+              <AddToWishlistButton wishlistItem={{ imageId: img.id }} />
             )}
           </div>
         ))}

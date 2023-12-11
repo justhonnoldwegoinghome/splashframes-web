@@ -10,7 +10,7 @@ interface AddToWishlistParams {
 function addToWishlist({ data }: AddToWishlistParams) {
   const wishlist = getWishlist().results;
 
-  const isInWishlist = wishlist.map((w) => w.id).includes(data.id);
+  const isInWishlist = wishlist.map((w) => w.imageId).includes(data.imageId);
 
   if (!isInWishlist) {
     localStorage.setItem("wishlist", JSON.stringify([...wishlist, data]));

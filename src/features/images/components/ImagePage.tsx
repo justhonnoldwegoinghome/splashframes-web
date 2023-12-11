@@ -1,14 +1,16 @@
 import Head from "next/head";
 
-import { AddToCartButton } from "@/features/cart";
+import { APIList } from "@/types/api";
+import { ImageProducts, Product } from "@/features/products";
 
 import { Image } from "..";
 
 interface ImagePageProps {
   image: Image;
+  imageProducts: APIList<Product>;
 }
 
-export function ImagePage({ image }: ImagePageProps) {
+export function ImagePage({ image, imageProducts }: ImagePageProps) {
   return (
     <>
       <Head>
@@ -23,7 +25,7 @@ export function ImagePage({ image }: ImagePageProps) {
           ))}
         </div>
         <div>
-          <AddToCartButton cartItem={{ id: image.id, quantity: 1 }} />
+          <ImageProducts imageProducts={imageProducts} />
         </div>
       </div>
     </>

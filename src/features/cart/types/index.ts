@@ -1,6 +1,6 @@
-import { Image } from "@/features/images";
+import { Product } from "@/features/products";
 
 export interface CartItem {
-  id: Image["id"];
+  productId: Product["id"];
   quantity: number;
 }

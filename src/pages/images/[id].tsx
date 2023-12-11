@@ -1,7 +1,15 @@
 import { Image, ImagePage, getImage, getImages } from "@/features/images";
+import { Product, getImageProducts } from "@/features/products";
+import { APIList } from "@/types/api";
 
-export default function Page({ image }: { image: Image }) {
-  return <ImagePage image={image} />;
+export default function Page({
+  image,
+  imageProducts,
+}: {
+  image: Image;
+  imageProducts: APIList<Product>;
+}) {
+  return <ImagePage image={image} imageProducts={imageProducts} />;
 }
 
 export async function getStaticPaths() {
@@ -19,10 +27,15 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: any) {
   const { id } = context.params!;
-  const image = await getImage({ id });
+  const [image, imageProducts] = await Promise.all([
+    getImage({ id }),
+    getImageProducts({ id }),
+  ]);
+
   return {
     props: {
       image,
+      imageProducts,
     },
   };
 }
