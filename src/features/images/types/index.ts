@@ -4,6 +4,6 @@ export interface Image {
   urls: [string, ...string[]];
   tags: [string, ...string[]];
   orientation: "landscape" | "square" | "portrait";
-  title: string;
+  name: string;
   description: string;
 }

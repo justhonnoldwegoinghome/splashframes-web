@@ -15,7 +15,7 @@ export function ImagePage({ image }: ImagePageProps) {
         <title>{image.id}</title>
       </Head>
       <div>
-        <h1>{image.title}</h1>
+        <h1>{image.name}</h1>
         <p>{image.description}</p>
         <div className="grid grid-cols-2 tablet:grid-cols-3 gap-2">
           {image.urls.map((u) => (
