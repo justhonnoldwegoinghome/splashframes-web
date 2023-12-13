@@ -1,11 +1,11 @@
 import Head from "next/head";
 
-import { useCart } from "@/features/cart";
+import { useCartItems } from "@/features/cart";
 
 export default function Page() {
-  const cartQuery = useCart();
+  const cartItemsQuery = useCartItems();
 
-  if (!cartQuery.data) return <div></div>;
+  if (!cartItemsQuery.data) return <div></div>;
 
   return (
     <>
@@ -15,7 +15,7 @@ export default function Page() {
       <div>
         <h1>Cart page</h1>
         <div className="flex gap-4">
-          {cartQuery.data.results.map((c) => (
+          {cartItemsQuery.data.results.map((c) => (
             <div key={c.productId} className="border">
               <h2>{`Cart item product id: ${c.productId}`}</h2>
             </div>

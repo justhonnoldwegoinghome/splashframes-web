@@ -1,9 +1,9 @@
 import Head from "next/head";
 
-import { useWishlist, RemoveFromWishlistButton } from "@/features/wishlist";
+import { useWishlistItems } from "@/features/wishlist";
 
 export default function Page() {
-  const wishlistQuery = useWishlist();
+  const wishlistQuery = useWishlistItems();
 
   if (!wishlistQuery.data) return <div></div>;
 
@@ -14,17 +14,6 @@ export default function Page() {
       </Head>
       <div>
         <h1>Wishlist page</h1>
-        <div className="flex gap-4">
-          {wishlistQuery.data.results.map((w) => (
-            <div key={w.imageId} className="border">
-              <h2>{`Wishlist item image id: ${w.imageId}`}</h2>
-
-              <div className="flex flex-col gap-4">
-                <RemoveFromWishlistButton wishlistItem={w} />
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </>
   );

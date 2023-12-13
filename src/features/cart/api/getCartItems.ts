@@ -4,8 +4,8 @@ import { APIList } from "@/types/api";
 
 import { CartItem } from "../types";
 
-export function getCart(): APIList<CartItem> {
-  const rawCart = localStorage.getItem("cart") || "[]";
+export function getCartItems(): APIList<CartItem> {
+  const rawCart = localStorage.getItem("cartItems") || "[]";
   const parsedCart = JSON.parse(rawCart) as CartItem[];
 
   return {
@@ -14,6 +14,6 @@ export function getCart(): APIList<CartItem> {
   };
 }
 
-export function useCart() {
-  return useSWR("/cart", () => getCart());
+export function useCartItems() {
+  return useSWR("/cartItems", () => getCartItems());
 }

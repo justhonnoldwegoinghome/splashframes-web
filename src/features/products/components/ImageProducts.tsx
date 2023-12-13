@@ -1,5 +1,5 @@
 import { APIList } from "@/types/api";
-import { AddToCartButton } from "@/features/cart";
+import { AddCartItemButton } from "@/features/cart";
 
 import { Product } from "..";
 
@@ -13,7 +13,7 @@ export function ImageProducts({ imageProducts }: ImageProductsProps) {
       {imageProducts.results.map((p) => (
         <div key={p.id} className="bg-gray-100">
           <p>{p.name}</p>
-          <AddToCartButton cartItem={{ productId: p.id, quantity: 1 }} />
+          <AddCartItemButton cartItem={{ product_id: p.id, quantity: 1 }} />
         </div>
       ))}
     </div>

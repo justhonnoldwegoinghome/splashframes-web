@@ -2,12 +2,6 @@ import _ from "lodash";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
-import {
-  AddToWishlistButton,
-  RemoveFromWishlistButton,
-  useWishlist,
-} from "@/features/wishlist";
-
 import { useImagesInfinite } from "../api/getImages";
 import { ImageCard } from "./ImageCard";
 import { ImageCardSkeleton } from "./ImageCardSkeleton";
@@ -24,7 +18,6 @@ We can either make <ImageCard /> have a min-height or just live with the possibi
 */
 
 export function ImageCards() {
-  const wishlistQuery = useWishlist();
   const imagesQuery = useImagesInfinite();
 
   const { ref, inView, entry } = useInView();
@@ -34,7 +27,7 @@ export function ImageCards() {
     }
   }, [inView, imagesQuery.hasEnded, entry]);
 
-  if (!wishlistQuery.data || !imagesQuery.data)
+  if (!imagesQuery.data)
     return (
       <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-4">
         {Array.from(Array(24).keys()).map((i) => (
@@ -51,13 +44,6 @@ export function ImageCards() {
         {images.map((img, i) => (
           <div ref={i === images.length - 1 ? ref : undefined} key={img.id}>
             <ImageCard image={img} />
-            {wishlistQuery.data?.results
-              .map((w) => w.imageId)
-              .includes(img.id) ? (
-              <RemoveFromWishlistButton wishlistItem={{ imageId: img.id }} />
-            ) : (
-              <AddToWishlistButton wishlistItem={{ imageId: img.id }} />
-            )}
           </div>
         ))}
       </div>

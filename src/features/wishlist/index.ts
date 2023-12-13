@@ -1,4 +1,3 @@
-export { useWishlist } from "./api/getWishlist";
+export { useWishlistItems } from "./api/getWishlistItems";
 export * from "./components/WishlistLink";
-export * from "./components/AddToWishlistButton";
-export * from "./components/RemoveFromWishlistButton";
+export * from "./components/WishlistButton";

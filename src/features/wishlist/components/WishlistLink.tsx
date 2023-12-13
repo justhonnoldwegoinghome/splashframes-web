@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import { useWishlist } from "../api/getWishlist";
+import { useWishlistItems } from "../api/getWishlistItems";
 
 export function WishlistLink() {
-  const wishlistQuery = useWishlist();
+  const wishlistQuery = useWishlistItems();
 
   if (!wishlistQuery.data) return <div></div>;
 

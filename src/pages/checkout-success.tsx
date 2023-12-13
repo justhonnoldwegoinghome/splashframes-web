@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-import { useClearCart } from "@/features/cart";
+import { useDeleteCartItems } from "@/features/cart";
 
 export default function Page() {
   const { push } = useRouter();
 
-  const clearCartMutation = useClearCart();
+  const deleteCartItemsMutation = useDeleteCartItems();
 
   useEffect(() => {
-    clearCartMutation.trigger().then(() => push("/"));
+    deleteCartItemsMutation.trigger().then(() => push("/"));
   }, []);
 
   return <div />;
