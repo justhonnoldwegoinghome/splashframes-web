@@ -5,6 +5,7 @@ import type { AppProps } from "next/app";
 import { DM_Sans } from "next/font/google";
 
 import "@/styles/globals.css";
+import { ProgressBar } from "@/components/progressBar";
 import { AnnouncementBanner } from "@/features/announcement";
 import { CartLink } from "@/features/cart";
 import { WishlistLink } from "@/features/wishlist";
@@ -14,6 +15,7 @@ const appFont = DM_Sans({ subsets: ["latin"] });
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className="bg-white text-black">
+      <ProgressBar />
       <AnnouncementBanner />
       <NavBar />
       <main className={clsx(appFont.className, "max-w-screen-laptop mx-auto")}>
