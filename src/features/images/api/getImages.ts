@@ -7,26 +7,34 @@ import { APIList } from "@/types/api";
 
 import { Image } from "../types";
 
+type PageToken = string | null;
+type MaxPageSize = number;
+export type IdsFilter = string;
+
+const IMAGES_MAX_PAGE_SIZE = 2;
+
 export function getImages({
   page_token,
   max_page_size,
+  ids_filter,
 }: {
-  page_token?: string | null;
-  max_page_size?: number;
+  page_token?: PageToken;
+  max_page_size?: MaxPageSize;
+  ids_filter?: IdsFilter;
 }) {
   return get<APIList<Image>>("/images", {
-    params: { page_token, max_page_size },
+    params: { page_token, max_page_size, ids_filter },
   });
 }
 
-// #1. size +1
-// #2. call `getKey`
-// #3. call `getImages`
-
-export function useImagesInfinite() {
-  const { data, size, setSize } = useSWRInfinite(getKey, (k) => getImages(k), {
-    revalidateFirstPage: false, // issue 1401 but not needed for less dynamic apps like this
-  });
+export function useImagesInfinite({ ids_filter }: { ids_filter?: IdsFilter }) {
+  const { data, size, setSize } = useSWRInfinite<APIList<Image>>(
+    (_, previousPageData) => getKey(previousPageData, ids_filter),
+    (k) => getImages(k),
+    {
+      revalidateFirstPage: false, // issue 1401 but not needed for less dynamic apps like this
+    }
+  );
 
   const hasEnded = useMemo(() => {
     if (data && data[data.length - 1].next_page_token === null) {
@@ -47,10 +55,14 @@ export function useImagesInfinite() {
   };
 }
 
-function getKey(_: any, previousPageData?: APIList<Image>) {
+function getKey(
+  previousPageData: APIList<Image> | null,
+  ids_filter?: IdsFilter
+) {
   return {
     resource: "images",
     page_token: previousPageData?.next_page_token,
-    max_page_size: 24,
+    max_page_size: IMAGES_MAX_PAGE_SIZE,
+    ids_filter,
   };
 }

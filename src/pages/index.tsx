@@ -8,7 +8,9 @@ export default function Page() {
       <Head>
         <title>Images</title>
       </Head>
-      <ImageCards />
+      <div>
+        <ImageCards />
+      </div>
     </>
   );
 }
