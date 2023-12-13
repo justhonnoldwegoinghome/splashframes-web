@@ -7,7 +7,9 @@ export function CartLink() {
 
   if (!cartItemsQuery.data) return <div></div>;
 
-  return (
-    <Link href="/me/cart">{`Cart (${cartItemsQuery.data.results.length})`}</Link>
-  );
+  const totalQuantity = cartItemsQuery.data.results
+    .map((c) => c.quantity)
+    .reduce((acc, cur) => acc + cur, 0);
+
+  return <Link href="/me/cart">{`Cart (${totalQuantity})`}</Link>;
 }
