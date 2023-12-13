@@ -1,6 +1,8 @@
 import _ from "lodash";
 import useSWRMutation from "swr/mutation";
 
+import { useFeedbackStore } from "@/stores/useFeedbackStore";
+
 import { getCart } from "./getCart";
 import { CartItem } from "../types";
 
@@ -27,11 +29,18 @@ function addToCart({ data }: AddToCartParams) {
 }
 
 export function useAddToCart() {
+  const notify = useFeedbackStore((s) => s.notify);
+
   return useSWRMutation(
     "/cart",
     (_, { arg }: { arg: AddToCartParams["data"] }) => addToCart({ data: arg }),
     {
       throwOnError: false,
+      onSuccess: () =>
+        notify({
+          msg: "Added to cart",
+          status: "success",
+        }),
     }
   );
 }
