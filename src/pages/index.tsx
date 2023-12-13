@@ -1,5 +1,14 @@
-import { ImagesPage } from "@/features/images";
+import Head from "next/head";
+
+import { ImageCards } from "@/features/images";
 
 export default function Page() {
-  return <ImagesPage />;
+  return (
+    <>
+      <Head>
+        <title>Images</title>
+      </Head>
+      <ImageCards />
+    </>
+  );
 }

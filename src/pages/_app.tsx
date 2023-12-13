@@ -16,11 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <div className="bg-white text-black">
       <AnnouncementBanner />
       <NavBar />
-      <div className={clsx(appFont.className, "max-w-screen-laptop mx-auto")}>
-        <div className="px-[3vw]">
-          <Component {...pageProps} />
-        </div>
-      </div>
+      <main className={clsx(appFont.className, "max-w-screen-laptop mx-auto")}>
+        <Component {...pageProps} />
+      </main>
     </div>
   );
 }

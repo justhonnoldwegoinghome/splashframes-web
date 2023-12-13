@@ -23,7 +23,7 @@ This is because <img/> are slow to load, causing the initial <ImageCard /> to be
 We can either make <ImageCard /> have a min-height or just live with the possibility of 2 (non-duplicate) api requests on first render.
 */
 
-export function ImagesPage() {
+export function ImageCards() {
   const wishlistQuery = useWishlist();
   const imagesQuery = useImagesInfinite();
 

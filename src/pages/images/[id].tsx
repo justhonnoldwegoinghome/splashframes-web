@@ -1,6 +1,8 @@
-import { Image, ImagePage, getImage, getImages } from "@/features/images";
-import { Product, getImageProducts } from "@/features/products";
+import Head from "next/head";
+
 import { APIList } from "@/types/api";
+import { Image, getImage, getImages } from "@/features/images";
+import { ImageProducts, Product, getImageProducts } from "@/features/products";
 
 export default function Page({
   image,
@@ -9,7 +11,25 @@ export default function Page({
   image: Image;
   imageProducts: APIList<Product>;
 }) {
-  return <ImagePage image={image} imageProducts={imageProducts} />;
+  return (
+    <>
+      <Head>
+        <title>{image.id}</title>
+      </Head>
+      <div>
+        <h1>{image.name}</h1>
+        <p>{image.description}</p>
+        <div className="grid grid-cols-2 tablet:grid-cols-3 gap-2">
+          {image.urls.map((u) => (
+            <img key={u} src={u} className="object-cover" />
+          ))}
+        </div>
+        <div>
+          <ImageProducts imageProducts={imageProducts} />
+        </div>
+      </div>
+    </>
+  );
 }
 
 export async function getStaticPaths() {
