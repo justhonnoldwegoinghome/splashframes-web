@@ -18,7 +18,11 @@ export default function Page() {
         <title>My wishlist</title>
       </Head>
       <div>
-        <ImageCards ids_filter={ids_filter} />
+        {ids_filter === "" ? (
+          <div>Empty</div>
+        ) : (
+          <ImageCards ids_filter={ids_filter} />
+        )}
       </div>
     </>
   );

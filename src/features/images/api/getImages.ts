@@ -11,7 +11,7 @@ type PageToken = string | null;
 type MaxPageSize = number;
 export type IdsFilter = string;
 
-const IMAGES_MAX_PAGE_SIZE = 2;
+const IMAGES_MAX_PAGE_SIZE = 12;
 
 export function getImages({
   page_token,
