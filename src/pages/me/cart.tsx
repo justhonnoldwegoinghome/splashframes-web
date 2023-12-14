@@ -1,15 +1,21 @@
 import Head from "next/head";
 
-import { CheckoutCartItemsForm } from "@/features/cart";
+import { useCartItems, CreateCheckoutSessionForm } from "@/features/cart";
 
 export default function Page() {
+  const cartItemsQuery = useCartItems();
+
+  if (!cartItemsQuery.data) return;
+
   return (
     <>
       <Head>
         <title>My cart</title>
       </Head>
       <div>
-        <CheckoutCartItemsForm />
+        <CreateCheckoutSessionForm
+          initialCartItems={cartItemsQuery.data.results}
+        />
       </div>
     </>
   );
