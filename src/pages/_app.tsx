@@ -6,7 +6,7 @@ import "@/styles/globals.css";
 import { FeedbackSnackbar } from "@/components/feedbackSnackbar";
 import { ProgressBar } from "@/components/progressBar";
 import { AnnouncementBanner } from "@/features/announcement";
-import { NavBar } from "@/components/navBar";
+import { NavBar, Footer } from "@/features/app";
 
 const appFont = DM_Sans({ subsets: ["latin"] });
 
@@ -20,6 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <main className={clsx(appFont.className, "max-w-screen-laptop mx-auto")}>
         <Component {...pageProps} />
       </main>
+      <Footer />
     </div>
   );
 }
