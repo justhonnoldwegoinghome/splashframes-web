@@ -6,10 +6,12 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Images</title>
+        <title>Splashframes</title>
       </Head>
       <div>
-        <ImageCards />
+        <div className="pt-12 pb-36">
+          <ImageCards />
+        </div>
       </div>
     </>
   );

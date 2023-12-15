@@ -45,7 +45,7 @@ export function ImageCards({ ids_filter }: ImageCardsProps) {
   const images = imagesQuery.data.results;
 
   return (
-    <div className="pt-8 pb-24">
+    <div>
       <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-8 tablet:gap-12 laptop:gap-16">
         {images.map((img, i) => (
           <div

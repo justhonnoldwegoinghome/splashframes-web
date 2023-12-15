@@ -14,9 +14,29 @@ export default function Page({
   return (
     <>
       <Head>
-        <title>{image.id}</title>
+        <title>{`${image.name} - Splashframes`}</title>
+        <meta name="description" content={image.description} />
       </Head>
-      <div>
+      <div className="flex gap-4 flex-wrap">
+        <div className="flex-[3] min-w-[400px] flex flex-col gap-4">
+          <div>
+            <img src={image.urls[0]} className="rounded" />
+          </div>
+          <div className="grid grid-cols-1 laptop:grid-cols-2 gap-4">
+            {image.urls.slice(1).map((u) => (
+              <img key={u} src={u} className="rounded" />
+            ))}
+          </div>
+          <div></div>
+        </div>
+        <div className="flex-[2] min-w-[300px] bg-slate-100">
+          <h1>{image.name}</h1>
+          <p>Price</p>
+          <p>Quantity</p>
+          <p>Add to cart</p>
+        </div>
+      </div>
+      {/* <div>
         <h1>{image.name}</h1>
         <p>{image.description}</p>
         <div className="grid grid-cols-2 tablet:grid-cols-3 gap-2">
@@ -27,7 +47,7 @@ export default function Page({
         <div>
           <ImageProducts imageProducts={imageProducts} />
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

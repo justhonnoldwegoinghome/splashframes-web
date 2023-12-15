@@ -6,7 +6,7 @@ export function AnnouncementBanner() {
   if (!announcementQuery.data) return;
 
   return (
-    <div className="h-8 bg-blue-500 text-sm text-white flex items-center justify-center">
+    <div className="h-8 bg-gradient-to-r from-cyan-200 to-yellow-200 via-teal-200  text-sm text-gray-700 flex items-center justify-center">
       {announcementQuery.data}
     </div>
   );
