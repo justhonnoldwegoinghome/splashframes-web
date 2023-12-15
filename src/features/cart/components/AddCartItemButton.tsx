@@ -1,6 +1,7 @@
+import _ from "lodash";
+
 import { useCartItems } from "../api/getCartItems";
-import { useCreateCartItem } from "../api/createCartItem";
-import { useUpdateCartItem } from "../api/updateCartItem";
+import { useUpdateCartItems } from "../api/updateCartItems";
 import { CartItem } from "../types";
 
 interface AddCartItemButtonProps {
@@ -9,36 +10,35 @@ interface AddCartItemButtonProps {
 
 export function AddCartItemButton({ cartItem }: AddCartItemButtonProps) {
   const cartItemsQuery = useCartItems();
-  const createCartItemMutation = useCreateCartItem();
-  const updateCartItemMutation = useUpdateCartItem();
+  const updateCartItemsMutation = useUpdateCartItems({
+    successMsg: "Added to cart",
+  });
 
   if (!cartItemsQuery.data) return;
 
-  const isInCartItems = cartItemsQuery.data.results
+  const cartItems = cartItemsQuery.data.results;
+
+  const isInCartItems = cartItems
     .map((c) => c.product_id)
     .includes(cartItem.product_id);
 
-  if (!isInCartItems)
-    return (
-      <button onClick={() => createCartItemMutation.trigger(cartItem)}>
-        Create cart item
-      </button>
-    );
-
-  const curCartItem = cartItemsQuery.data.results.filter(
-    (c) => c.product_id === cartItem.product_id
-  )[0];
+  const updatedCartItems = isInCartItems
+    ? _.map(cartItems, (c) => {
+        if (c.product_id === cartItem.product_id) {
+          return { ...c, quantity: c.quantity + 1 };
+        } else {
+          return c;
+        }
+      })
+    : [...cartItems, cartItem];
 
   return (
     <button
       onClick={() =>
-        updateCartItemMutation.trigger({
-          product_id: curCartItem.product_id,
-          quantity: curCartItem.quantity + 1,
-        })
+        updateCartItemsMutation.trigger({ data: updatedCartItems })
       }
     >
-      Update cart item
+      Add to cart
     </button>
   );
 }

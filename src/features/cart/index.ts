@@ -1,5 +1,5 @@
 export { useCartItems } from "./api/getCartItems";
-export { useDeleteCartItems } from "./api/deleteCartItems";
+export { useUpdateCartItems } from "./api/updateCartItems";
 export * from "./components/CartLink";
 export * from "./components/AddCartItemButton";
 export * from "./components/CreateCheckoutSessionForm";

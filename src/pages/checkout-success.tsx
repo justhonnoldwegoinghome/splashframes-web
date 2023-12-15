@@ -1,15 +1,25 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-import { useDeleteCartItems } from "@/features/cart";
+import { useUpdateCartItems } from "@/features/cart";
+import { useFeedbackStore } from "@/stores/useFeedbackStore";
 
 export default function Page() {
   const { push } = useRouter();
+  const notify = useFeedbackStore((s) => s.notify);
 
-  const deleteCartItemsMutation = useDeleteCartItems();
+  const updateCartItemsMutation = useUpdateCartItems({});
 
   useEffect(() => {
-    deleteCartItemsMutation.trigger().then(() => push("/"));
+    updateCartItemsMutation
+      .trigger({ data: [] })
+      .then(() => push("/"))
+      .then(() =>
+        notify({
+          status: "success",
+          msg: "Order has been placed",
+        })
+      );
   }, []);
 
   return <div />;
