@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 
-import { WishlistButton } from "@/features/wishlist";
-
 import { IdsFilter, useImagesInfinite } from "../api/getImages";
 
 /* 
@@ -34,7 +32,7 @@ export function ImageCards({ ids_filter }: ImageCardsProps) {
 
   if (!imagesQuery.data)
     return (
-      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-8">
         {Array.from(Array(24).keys()).map((i) => (
           <div
             key={i}
@@ -48,14 +46,13 @@ export function ImageCards({ ids_filter }: ImageCardsProps) {
 
   return (
     <div>
-      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-8">
         {images.map((img, i) => (
           <div ref={i === images.length - 1 ? ref : undefined} key={img.id}>
-            <div>
+            <div className="relative">
               <Link href={`/images/${img.id}`}>
-                <img src={img.urls[0]} />
+                <img src={img.urls[0]} className="rounded-lg" />
               </Link>
-              <WishlistButton imageId={img.id} />
             </div>
           </div>
         ))}

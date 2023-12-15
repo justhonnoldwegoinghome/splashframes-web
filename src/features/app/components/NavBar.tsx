@@ -1,9 +1,8 @@
 import clsx from "clsx";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 import { CartLink } from "@/features/cart";
-import { WishlistLink } from "@/features/wishlist";
 
 export function NavBar() {
   const [isSticky, setIsSticky] = useState(false);
@@ -20,17 +19,21 @@ export function NavBar() {
 
   return (
     <div
-      className={clsx("py-4 flex justify-between sticky top-0", {
-        "bg-gray-50": !isSticky,
-        "bg-gray-100 shadow-lg": isSticky,
+      className={clsx("bg-white z-10 sticky top-0", {
+        "shadow-lg": isSticky,
       })}
     >
-      <div>
-        <Link href="/">Logo</Link>
-      </div>
-      <div className="flex gap-4">
-        <WishlistLink />
-        <CartLink />
+      <div className="max-w-screen-laptop px-[3vw] mx-auto">
+        <div className="py-6 flex justify-between">
+          <div>
+            <Link href="/">
+              <span>Splashframes</span>
+            </Link>
+          </div>
+          <div className="flex gap-4">
+            <CartLink />
+          </div>
+        </div>
       </div>
     </div>
   );
