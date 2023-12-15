@@ -5,6 +5,7 @@ import { Registration } from "@/components/form";
 
 import { CartItem } from "../types";
 import { useUpdateCartItems } from "..";
+import { ProductSummary } from "@/features/products";
 
 interface CartItemsFieldProps {
   label: string;
@@ -39,7 +40,7 @@ export function CartItemsField({ label, registration }: CartItemsFieldProps) {
       <div className="flex flex-col gap-4">
         {cartItems.map((c) => (
           <div key={c.product_id}>
-            <p>{c.product_id}</p>
+            <ProductSummary id={c.product_id} />
             <div className="flex gap-4">
               <button
                 type="button"
