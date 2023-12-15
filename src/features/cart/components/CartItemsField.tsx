@@ -2,10 +2,10 @@ import _ from "lodash";
 import { useEffect } from "react";
 
 import { Registration } from "@/components/form";
+import { ProductSummary } from "@/features/products";
 
 import { CartItem } from "../types";
 import { useUpdateCartItems } from "..";
-import { ProductSummary } from "@/features/products";
 
 interface CartItemsFieldProps {
   label: string;
@@ -34,6 +34,10 @@ export function CartItemsField({ label, registration }: CartItemsFieldProps) {
     );
   }
 
+  function removeCartItem(product_id: CartItem["product_id"]) {
+    helpers.setValue(cartItems.filter((c) => c.product_id !== product_id));
+  }
+
   return (
     <div className="p-4 bg-blue-100">
       <p>{label}</p>
@@ -45,7 +49,7 @@ export function CartItemsField({ label, registration }: CartItemsFieldProps) {
               <button
                 type="button"
                 onClick={() => updateQuantity(c.product_id, -1)}
-                disabled={c.quantity === 0}
+                disabled={c.quantity === 1}
               >
                 Decrease quantity
               </button>
@@ -55,6 +59,14 @@ export function CartItemsField({ label, registration }: CartItemsFieldProps) {
                 onClick={() => updateQuantity(c.product_id, 1)}
               >
                 Increase quantity
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                onClick={() => removeCartItem(c.product_id)}
+              >
+                Remove
               </button>
             </div>
           </div>
