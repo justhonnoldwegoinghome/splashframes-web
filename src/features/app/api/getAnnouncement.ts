@@ -1,7 +1,7 @@
 import useSWR from "swr";
 
 export function getAnnouncement() {
-  return "Announcement";
+  return "";
 }
 
 export function useAnnouncement() {

@@ -32,11 +32,11 @@ export function ImageCards({ ids_filter }: ImageCardsProps) {
 
   if (!imagesQuery.data)
     return (
-      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-8">
+      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-8 tablet:gap-12 laptop:gap-16">
         {Array.from(Array(24).keys()).map((i) => (
           <div
             key={i}
-            className="w-full aspect-[5/4] bg-gray-200 animate-pulse"
+            className="w-full aspect-[5/4] bg-gray-100 animate-pulse rounded tablet:rounded-xl"
           />
         ))}
       </div>
@@ -45,17 +45,26 @@ export function ImageCards({ ids_filter }: ImageCardsProps) {
   const images = imagesQuery.data.results;
 
   return (
-    <div>
-      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-8">
+    <div className="pt-8 pb-24">
+      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-8 tablet:gap-12 laptop:gap-16">
         {images.map((img, i) => (
-          <div ref={i === images.length - 1 ? ref : undefined} key={img.id}>
-            <div className="relative">
+          <div
+            ref={i === images.length - 1 ? ref : undefined}
+            key={img.id}
+            className="bg-white p-1 hover:p-0 duration-300 rounded tablet:rounded-xl"
+          >
+            <div className="hover:shadow-[0_5px_10px_rgba(0,0,0,0.1)] duration-300 rounded tablet:rounded-xl">
               <Link href={`/images/${img.id}`}>
-                <img src={img.urls[0]} className="rounded-lg" />
+                <img src={img.urls[0]} className="rounded tablet:rounded-xl" />
               </Link>
             </div>
           </div>
         ))}
+      </div>
+      <div className="mt-24 flex justify-center">
+        <p className="border-t-2 border-gray-200 p-4 text-gray-500">
+          You've reached the end
+        </p>
       </div>
     </div>
   );

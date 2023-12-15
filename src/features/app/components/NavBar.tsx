@@ -1,8 +1,11 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Caveat } from "next/font/google";
 
 import { CartLink } from "@/features/cart";
+
+const logoFont = Caveat({ subsets: ["latin"] });
 
 export function NavBar() {
   const [isSticky, setIsSticky] = useState(false);
@@ -23,11 +26,23 @@ export function NavBar() {
         "shadow-lg": isSticky,
       })}
     >
-      <div className="max-w-screen-laptop px-[3vw] mx-auto">
-        <div className="py-6 flex justify-between">
+      <div className="max-w-screen-laptop px-8 mx-auto">
+        <div
+          className={clsx("flex items-center justify-between", {
+            "py-4": isSticky,
+            "py-8": !isSticky,
+          })}
+        >
           <div>
             <Link href="/">
-              <span>Splashframes</span>
+              <span
+                className={clsx(
+                  logoFont.className,
+                  "text-4xl font-bold text-blue-500 hover:text-gray-700 duration-200"
+                )}
+              >
+                Splashframes
+              </span>
             </Link>
           </div>
           <div className="flex gap-4">
