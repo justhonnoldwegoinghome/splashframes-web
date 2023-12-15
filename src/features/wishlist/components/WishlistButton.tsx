@@ -1,32 +1,35 @@
-import { useEffect, useState } from "react";
-
-import { Image } from "@/features/images";
-
 import { useWishlistItems } from "../api/getWishlistItems";
-import { DeleteWishlistItemButton } from "./DeleteWishlistItemButton";
-import { CreateWishlistItemButton } from "./CreateWishlistItemButton";
+import { useUpdateWishlistItems } from "../api/updateWishlistItems";
+import { WishlistItem } from "../types";
 
 interface WishlistButtonProps {
-  imageId: Image["id"];
+  imageId: WishlistItem["image_id"];
 }
 
 export function WishlistButton({ imageId }: WishlistButtonProps) {
-  const [isInWishList, setIsInWishlist] = useState<boolean | null>(null);
-
   const wishlistItemsQuery = useWishlistItems();
 
-  useEffect(() => {
-    if (wishlistItemsQuery.data) {
-      setIsInWishlist(
-        wishlistItemsQuery.data.results.map((w) => w.image_id).includes(imageId)
-      );
-    }
-  }, [wishlistItemsQuery.data]);
+  const updateWishlistItemsMutation = useUpdateWishlistItems({});
 
-  if (isInWishList === null) return;
+  if (!wishlistItemsQuery.data) return;
 
-  if (isInWishList)
-    return <DeleteWishlistItemButton wishlistItem={{ image_id: imageId }} />;
+  const wishlistItems = wishlistItemsQuery.data.results;
 
-  return <CreateWishlistItemButton wishlistItem={{ image_id: imageId }} />;
+  const isInWishlistItems = wishlistItems
+    .map((w) => w.image_id)
+    .includes(imageId);
+
+  const updatedWishlistItems = isInWishlistItems
+    ? wishlistItems.filter((w) => w.image_id !== imageId)
+    : [...wishlistItems, { image_id: imageId }];
+
+  return (
+    <button
+      onClick={() =>
+        updateWishlistItemsMutation.trigger({ data: updatedWishlistItems })
+      }
+    >
+      {isInWishlistItems ? "Remove from wishlist" : "Add to wishlist"}
+    </button>
+  );
 }
