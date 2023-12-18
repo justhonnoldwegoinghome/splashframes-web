@@ -15,6 +15,11 @@ const config: Config = {
         laptop: "1200px",
         desktop: "1920px",
       },
+      colors: {
+        primary: "#1f2937",
+        secondary: "#6b7280",
+        sauce: "#3b82f6",
+      },
     },
     plugins: [],
   },

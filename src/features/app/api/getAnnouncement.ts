@@ -1,7 +1,7 @@
 import useSWR from "swr";
 
 export function getAnnouncement() {
-  return "Free shipping in Singapore";
+  return "Free shipping to selected countries";
 }
 
 export function useAnnouncement() {

@@ -1,3 +1,4 @@
+import { PiCheckCircleFill } from "react-icons/pi";
 import { useEffect } from "react";
 
 import { useFeedbackStore } from "@/stores/useFeedbackStore";
@@ -10,7 +11,7 @@ export function FeedbackSnackbar() {
 
   useEffect(() => {
     if (feedback) {
-      setTimeout(dismiss, FEEDBACK_DURATION);
+      setTimeout(() => dismiss(), FEEDBACK_DURATION);
     }
   }, [feedback]);
 
@@ -20,13 +21,10 @@ export function FeedbackSnackbar() {
   const { icon } = statuses[status];
 
   return (
-    <div className="fixed bottom-[5vh] right-1/2 translate-x-1/2">
-      <div className="bg-white p-4">
+    <div className={"fixed bottom-[5vh] right-12 z-[100] slideIn"}>
+      <div className="flex gap-4 items-center p-4 rounded-2xl shadow-[0_4px_15px_rgba(0,0,0,0.08)] bg-white">
         {icon}
-        <span>{msg}</span>
-        <div>
-          <button onClick={dismiss}>Close</button>
-        </div>
+        <span className="font-semibold">{msg}</span>
       </div>
     </div>
   );
@@ -34,7 +32,7 @@ export function FeedbackSnackbar() {
 
 const statuses = {
   success: {
-    icon: <div className="bg-teal-400">Success icon</div>,
+    icon: <PiCheckCircleFill className="text-3xl text-teal-400" />,
   },
   error: {
     icon: <div className="bg-red-400">Warning icon</div>,

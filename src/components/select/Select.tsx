@@ -23,7 +23,7 @@ export function Select<V>({
     <div className="w-full max-w-[280px]">
       <Listbox value={selectedOption} onChange={onChange}>
         <div className="relative mt-1">
-          <Listbox.Button className="relative w-full cursor-default rounded bg-white py-3 pl-3 pr-12 text-left ring-1 ring-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-800 text-sm text-gray-600">
+          <Listbox.Button className="relative w-full cursor-default rounded bg-white py-3 pl-3 pr-12 text-left ring-1 ring-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-800 text-sm text-gray-500">
             <span className="block truncate">{selectedOption.label}</span>
             <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
               <PiCaretDownLight className="h-4 w-4" aria-hidden="true" />

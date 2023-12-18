@@ -9,7 +9,7 @@ const logoFont = Caveat({ subsets: ["latin"] });
 export function NavBar() {
   return (
     <div className="bg-white">
-      <div className="max-w-screen-laptop px-8 mx-auto">
+      <div className="max-w-screen-laptop px-[4vw] mx-auto">
         <div className="py-4 tablet:py-8 flex items-center justify-between">
           <div>
             <Link href="/">

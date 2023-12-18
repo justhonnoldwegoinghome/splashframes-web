@@ -77,13 +77,14 @@ export function AddToCartForm({ splashframe }: AddToCartFormProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-6">
-        <h1 className="text-4xl">{splashframe.title}</h1>
-        <p className="text-lg">{`$${variant.price_usd * quantity} USD`}</p>
+      <div>
+        <h1 className="text-3xl mb-2">{splashframe.title}</h1>
+        <p className="text-gray-500 mb-8">{splashframe.description}</p>
+        <p className="text-xl">{`$${variant.price_usd * quantity} USD`}</p>
       </div>
       <div className="flex flex-col gap-6">
         <div>
-          <p className="text-sm text-gray-600 mb-1.5">Size</p>
+          <p className="text-sm text-gray-500 mb-1.5">Size</p>
           <Select
             options={sizeOptions}
             selectedOption={selectedSizeOption}
@@ -91,7 +92,7 @@ export function AddToCartForm({ splashframe }: AddToCartFormProps) {
           />
         </div>
         <div>
-          <p className="text-sm text-gray-600 mb-1.5">Quantity</p>
+          <p className="text-sm text-gray-500 mb-1.5">Quantity</p>
           <div className="w-[120px]">
             <Select
               options={quantityOptions}
@@ -111,7 +112,16 @@ export function AddToCartForm({ splashframe }: AddToCartFormProps) {
                   c.variant_id === variant.id
               )[0].id
             }
-            data={{ json_merge_patch: { quantity } }}
+            data={{
+              json_merge_patch: {
+                quantity:
+                  cartItems.filter(
+                    (c) =>
+                      c.splashframe_id === splashframe.id &&
+                      c.variant_id === variant.id
+                  )[0].quantity + quantity,
+              },
+            }}
           >
             Add to Cart
           </PatchCartItemButton>

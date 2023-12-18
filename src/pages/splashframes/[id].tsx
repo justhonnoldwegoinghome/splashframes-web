@@ -15,9 +15,9 @@ export default function Page({ splashframe }: { splashframe: Splashframe }) {
         <title>{`${splashframe.title} - Splashframes`}</title>
         <meta name="description" content={splashframe.description} />
       </Head>
-      <div className="pb-24">
+      <div>
         <div className="flex gap-12 flex-wrap">
-          <div className="flex-[3] min-w-[400px] flex flex-col gap-4">
+          <div className="flex-[3] min-w-[300px] flex flex-col gap-4">
             <div>
               <img src={splashframe.image_urls[0]} className="rounded" />
             </div>

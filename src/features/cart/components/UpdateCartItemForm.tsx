@@ -1,6 +1,9 @@
+import { PiTrashLight } from "react-icons/pi";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
-import { useSplashframe } from "@/features/splashframes";
+import { Select } from "@/components/select";
+import { Splashframe } from "@/features/splashframes";
 
 import { useDeleteCartItem } from "../api/deleteCartItem";
 import { usePatchCartItem } from "../api/patchCartItem";
@@ -8,61 +11,86 @@ import { CartItem } from "../types";
 
 interface UpdateCartItemFormProps {
   cartItem: CartItem;
+  splashframe: Splashframe;
 }
 
-export interface PatchCartItemInput {
-  json_merge_patch: {
-    quantity?: number;
-  };
-}
-
-export function UpdateCartItemForm({ cartItem }: UpdateCartItemFormProps) {
-  const splashframeQuery = useSplashframe({ id: cartItem.splashframe_id });
-
+export function UpdateCartItemForm({
+  cartItem,
+  splashframe,
+}: UpdateCartItemFormProps) {
   const patchCartItemMutation = usePatchCartItem({});
   const deleteCartItemMutation = useDeleteCartItem();
 
-  function updateQuantity(change: number) {
+  const [quantity, setQuantity] = useState(cartItem.quantity);
+  useEffect(() => {
     patchCartItemMutation.trigger({
       id: cartItem.id,
-      data: {
-        json_merge_patch: {
-          quantity: cartItem.quantity + change,
-        },
-      },
+      data: { json_merge_patch: { quantity } },
     });
-  }
+  }, [quantity]);
 
-  if (!splashframeQuery.data) return <div />;
+  const quantityOptions = useMemo(
+    () =>
+      Array.from({ length: 4 }, (_, i) => ({
+        value: i + 1,
+        label: String(i + 1),
+      })),
+    []
+  );
+  const selectedQuantityOption = useMemo(
+    () => ({
+      value: quantity,
+      label: String(quantity),
+    }),
+    [quantity]
+  );
+
+  const variant = splashframe.variants.filter(
+    (v) => v.id === cartItem.variant_id
+  )[0];
 
   return (
-    <div className="py-8 relative flex gap-8">
-      <div className="w-[100px]">
-        <img src={splashframeQuery.data.image_urls[0]} />
-        <Link href={`/splashframes/${cartItem.splashframe_id}`}>
-          {splashframeQuery.data.title}
-        </Link>
+    <div className="flex gap-4 tablet:gap-12">
+      <div id="splashframe-image" className="max-w-[160px]">
+        <img src={splashframe.image_urls[0]} className="rounded" />
       </div>
-      <div className="flex gap-4 items-center">
-        <button
-          type="button"
-          onClick={() => updateQuantity(-1)}
-          disabled={cartItem.quantity === 1}
-        >
-          -
-        </button>
-        <div>{cartItem.quantity}</div>
-        <button type="button" onClick={() => updateQuantity(1)}>
-          +
-        </button>
+
+      <div className="flex-1 min-w-[180px] flex flex-col justify-between gap-4">
+        <div id="variant-description" className="flex flex-col gap-1.5">
+          <Link
+            href={`/splashframes/${cartItem.splashframe_id}`}
+            className="hover:underline underline-offset-4"
+          >
+            {variant.title}
+          </Link>
+          <p className="text-sm text-secondary">{`$${variant.price_usd}`}</p>
+          <p className="text-sm text-secondary">
+            {`Size: ${variant.size} (${variant.width_inches}" x ${variant.height_inches}")
+          `}
+          </p>
+        </div>
+
+        <div id="quantity-field" className="w-[140px]">
+          <p className="text-sm text-secondary">Quantity</p>
+          <div className="flex items-center gap-4">
+            <Select
+              options={quantityOptions}
+              selectedOption={selectedQuantityOption}
+              onChange={(o) => setQuantity(o.value)}
+            />
+            <button
+              type="button"
+              onClick={() =>
+                deleteCartItemMutation.trigger({ id: cartItem.id })
+              }
+            >
+              <PiTrashLight className="text-lg" />
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="absolute top-0 right-0">
-        <button
-          type="button"
-          onClick={() => deleteCartItemMutation.trigger({ id: cartItem.id })}
-        >
-          DeleteButton
-        </button>
+      <div id="price" className="flex items-center">
+        <p className="text-xl">{`$${quantity * variant.price_usd}`}</p>
       </div>
     </div>
   );

@@ -9,9 +9,7 @@ export default function Page() {
         <title>Splashframes</title>
       </Head>
       <div>
-        <div className="pt-12 pb-36">
-          <SplashframeCards />
-        </div>
+        <SplashframeCards />
       </div>
     </>
   );
