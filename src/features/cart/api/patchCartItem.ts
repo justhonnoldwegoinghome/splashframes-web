@@ -15,7 +15,7 @@ interface PatchCartItemParams {
   };
 }
 
-function patchCartItem({ id, data }: PatchCartItemParams) {
+async function patchCartItem({ id, data }: PatchCartItemParams) {
   const cartItems = getCartItems();
 
   localStorage.setItem(
@@ -33,6 +33,7 @@ function patchCartItem({ id, data }: PatchCartItemParams) {
       })
     )
   );
+  await new Promise((r) => setTimeout(r, 500));
   return data;
 }
 

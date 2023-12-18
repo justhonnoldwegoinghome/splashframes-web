@@ -12,7 +12,7 @@ const config: Config = {
       screens: {
         mobile: "375px",
         tablet: "768px",
-        laptop: "1280px",
+        laptop: "1200px",
         desktop: "1920px",
       },
     },

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { useFeedbackStore } from "@/stores/useFeedbackStore";
 
-const FEEDBACK_DURATION = 7000;
+const FEEDBACK_DURATION = 4000;
 
 export function FeedbackSnackbar() {
   const feedback = useFeedbackStore((s) => s.feedback);

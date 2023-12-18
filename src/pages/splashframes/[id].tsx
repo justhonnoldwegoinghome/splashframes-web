@@ -15,20 +15,22 @@ export default function Page({ splashframe }: { splashframe: Splashframe }) {
         <title>{`${splashframe.title} - Splashframes`}</title>
         <meta name="description" content={splashframe.description} />
       </Head>
-      <div className="flex gap-4 flex-wrap">
-        <div className="flex-[3] min-w-[400px] flex flex-col gap-4">
-          <div>
-            <img src={splashframe.image_urls[0]} className="rounded" />
+      <div className="pb-24">
+        <div className="flex gap-12 flex-wrap">
+          <div className="flex-[3] min-w-[400px] flex flex-col gap-4">
+            <div>
+              <img src={splashframe.image_urls[0]} className="rounded" />
+            </div>
+            <div className="grid grid-cols-1 laptop:grid-cols-2 gap-4">
+              {splashframe.image_urls.slice(1).map((u) => (
+                <img key={u} src={u} className="rounded" />
+              ))}
+            </div>
+            <div></div>
           </div>
-          <div className="grid grid-cols-1 laptop:grid-cols-2 gap-4">
-            {splashframe.image_urls.slice(1).map((u) => (
-              <img key={u} src={u} className="rounded" />
-            ))}
+          <div className="flex-[2] min-w-[300px]">
+            <AddToCartForm splashframe={splashframe} />
           </div>
-          <div></div>
-        </div>
-        <div className="flex-[2] min-w-[300px] bg-slate-100">
-          <AddToCartForm splashframe={splashframe} />
         </div>
       </div>
     </>

@@ -1,10 +1,10 @@
 export interface Variant {
   id: string;
-  size: "S" | "M";
+  size: string;
   title: string;
   width_inches: number;
   height_inches: number;
-  price_sgd: number;
+  price_usd: number;
 }
 
 export interface Splashframe {

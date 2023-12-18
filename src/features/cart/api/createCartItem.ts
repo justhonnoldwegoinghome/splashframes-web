@@ -9,7 +9,7 @@ interface CreateCartItemParams {
   data: CreateCartItemInput;
 }
 
-function createCartItem({ data }: CreateCartItemParams) {
+async function createCartItem({ data }: CreateCartItemParams) {
   const cartItems = getCartItems();
 
   localStorage.setItem(
@@ -22,6 +22,8 @@ function createCartItem({ data }: CreateCartItemParams) {
       },
     ])
   );
+
+  await new Promise((r) => setTimeout(r, 500));
   return data;
 }
 
