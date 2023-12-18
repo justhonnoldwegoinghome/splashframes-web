@@ -1,5 +1,6 @@
 export { useCartItems } from "./api/getCartItems";
-export { useUpdateCartItems } from "./api/updateCartItems";
+export * from "./api/createCheckoutSession";
+export * from "./api/clearCartItems";
 export * from "./components/CartLink";
-export * from "./components/AddCartItemButton";
-export * from "./components/CreateCheckoutSessionForm";
+export * from "./components/AddToCartForm";
+export * from "./components/UpdateCartItemForm";

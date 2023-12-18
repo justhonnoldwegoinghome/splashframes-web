@@ -1,22 +1,33 @@
-import Head from "next/head";
-
-import { useCartItems, CreateCheckoutSessionForm } from "@/features/cart";
+import {
+  UpdateCartItemForm,
+  useCartItems,
+  useCreateCheckoutSession,
+} from "@/features/cart";
 
 export default function Page() {
+  const createCheckoutSessionMutation = useCreateCheckoutSession();
   const cartItemsQuery = useCartItems();
 
   if (!cartItemsQuery.data) return;
 
+  const cartItems = cartItemsQuery.data;
+
   return (
-    <>
-      <Head>
-        <title>My cart</title>
-      </Head>
+    <div>
+      {cartItems.map((c) => (
+        <UpdateCartItemForm key={c.id} cartItem={c} />
+      ))}
       <div>
-        <CreateCheckoutSessionForm
-          initialCartItems={cartItemsQuery.data.results}
-        />
+        <button
+          onClick={() =>
+            createCheckoutSessionMutation.trigger({
+              data: { cart_items: cartItems },
+            })
+          }
+        >
+          Checkout
+        </button>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,0 +1,45 @@
+import useSWRMutation from "swr/mutation";
+
+import { useFeedbackStore } from "@/stores/useFeedbackStore";
+
+import { CreateCartItemInput } from "../components/AddToCartForm";
+import { getCartItems } from "./getCartItems";
+
+interface CreateCartItemParams {
+  data: CreateCartItemInput;
+}
+
+function createCartItem({ data }: CreateCartItemParams) {
+  const cartItems = getCartItems();
+
+  localStorage.setItem(
+    "cartItems",
+    JSON.stringify([
+      ...cartItems,
+      {
+        id: String(new Date().valueOf()),
+        ...data,
+      },
+    ])
+  );
+  return data;
+}
+
+export function useCreateCartItem({ successMsg }: { successMsg?: string }) {
+  const notify = useFeedbackStore((s) => s.notify);
+
+  return useSWRMutation(
+    "/cartItems",
+    (_, { arg }: { arg: { data: CreateCartItemParams["data"] } }) =>
+      createCartItem({ data: arg.data }),
+    {
+      throwOnError: false,
+      onSuccess: () =>
+        successMsg &&
+        notify({
+          msg: successMsg,
+          status: "success",
+        }),
+    }
+  );
+}

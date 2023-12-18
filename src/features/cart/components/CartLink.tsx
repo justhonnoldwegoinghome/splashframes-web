@@ -6,9 +6,11 @@ import { useCartItems } from "../api/getCartItems";
 export function CartLink() {
   const cartItemsQuery = useCartItems();
 
-  if (!cartItemsQuery.data) return <div></div>;
+  if (!cartItemsQuery.data) return;
 
-  const totalQuantity = cartItemsQuery.data.results
+  const cartItems = cartItemsQuery.data;
+
+  const totalQuantity = cartItems
     .map((c) => c.quantity)
     .reduce((acc, cur) => acc + cur, 0);
 
@@ -23,7 +25,6 @@ export function CartLink() {
           {totalQuantity}
         </span>
       </div>
-      {/* <span className="text-sm">Cart</span> */}
     </Link>
   );
 }

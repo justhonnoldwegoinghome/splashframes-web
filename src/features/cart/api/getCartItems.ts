@@ -1,17 +1,12 @@
 import useSWR from "swr";
 
-import { APIList } from "@/types/api";
-
 import { CartItem } from "../types";
 
-export function getCartItems(): APIList<CartItem> {
+export function getCartItems(): CartItem[] {
   const rawCart = localStorage.getItem("cartItems") || "[]";
   const parsedCart = JSON.parse(rawCart) as CartItem[];
 
-  return {
-    next_page_token: null,
-    results: parsedCart,
-  };
+  return parsedCart;
 }
 
 export function useCartItems() {

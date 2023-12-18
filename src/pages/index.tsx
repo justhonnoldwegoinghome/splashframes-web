@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { ImageCards } from "@/features/images";
+import { SplashframeCards } from "@/features/splashframes";
 
 export default function Page() {
   return (
@@ -10,7 +10,7 @@ export default function Page() {
       </Head>
       <div>
         <div className="pt-12 pb-36">
-          <ImageCards />
+          <SplashframeCards />
         </div>
       </div>
     </>

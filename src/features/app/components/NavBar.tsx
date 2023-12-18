@@ -16,14 +16,14 @@ export function NavBar() {
               <span
                 className={clsx(
                   logoFont.className,
-                  "text-4xl font-bold text-blue-500 hover:text-gray-700 duration-200"
+                  "text-3xl font-light  text-gray-600 hover:text-gray-900 duration-200"
                 )}
               >
                 Splashframes
               </span>
             </Link>
           </div>
-          <div className="flex gap-4">
+          <div>
             <CartLink />
           </div>
         </div>

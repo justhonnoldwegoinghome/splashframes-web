@@ -3,15 +3,17 @@ import { useRouter } from "next/router";
 
 import { post } from "@/utils/apiClient";
 
-import { CreateCheckoutSessionInput } from "..";
+import { CartItem } from "../types";
 
 type CheckoutURL = string;
 
 interface CreateCheckoutSessionParams {
-  data: CreateCheckoutSessionInput;
+  data: {
+    cart_items: CartItem[];
+  };
 }
 
-function CreateCheckoutSession({ data }: CreateCheckoutSessionParams) {
+function createCheckoutSession({ data }: CreateCheckoutSessionParams) {
   return post<CheckoutURL>("/create-checkout-session", data);
 }
 
@@ -20,8 +22,8 @@ export function useCreateCheckoutSession() {
 
   return useSWRMutation(
     "/create-checkout-session",
-    (_, { arg }: { arg: CreateCheckoutSessionParams["data"] }) =>
-      CreateCheckoutSession({ data: arg }),
+    (_, { arg }: { arg: CreateCheckoutSessionParams }) =>
+      createCheckoutSession(arg),
     {
       throwOnError: false,
       onError: (e) => console.log(e),
