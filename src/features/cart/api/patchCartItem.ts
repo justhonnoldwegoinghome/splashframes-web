@@ -15,7 +15,7 @@ interface PatchCartItemParams {
   };
 }
 
-async function patchCartItem({ id, data }: PatchCartItemParams) {
+export async function patchCartItem({ id, data }: PatchCartItemParams) {
   const cartItems = getCartItems();
 
   localStorage.setItem(

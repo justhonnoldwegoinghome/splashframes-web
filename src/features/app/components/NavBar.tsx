@@ -4,6 +4,8 @@ import { Caveat } from "next/font/google";
 
 import { CartLink } from "@/features/cart";
 
+import { CountryMenu } from "./CountryMenu";
+
 const logoFont = Caveat({ subsets: ["latin"] });
 
 export function NavBar() {
@@ -23,8 +25,9 @@ export function NavBar() {
               </span>
             </Link>
           </div>
-          <div>
+          <div className="flex gap-2 items-center">
             <CartLink />
+            <CountryMenu />
           </div>
         </div>
       </div>

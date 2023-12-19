@@ -2,13 +2,10 @@ import _ from "lodash";
 import { useEffect, useMemo, useState } from "react";
 
 import { Select } from "@/components/select";
-import { Splashframe, Variant } from "@/features/splashframes";
 import { Spinner } from "@/components/spinner";
+import { Splashframe, Variant } from "@/features/splashframes";
 
-import { useCartItems } from "../api/getCartItems";
-import { useCreateCartItem } from "../api/createCartItem";
-import { usePatchCartItem } from "../api/patchCartItem";
-import { CartItem } from "../types";
+import { useAddToCart } from "../api/addToCart";
 
 export interface CreateCartItemInput {
   splashframe_id: Splashframe["id"];
@@ -21,27 +18,14 @@ interface AddToCartFormProps {
 }
 
 export function AddToCartForm({ splashframe }: AddToCartFormProps) {
+  const addToCartMutation = useAddToCart();
+
   const [variant, setVariant] = useState(splashframe.variants[0]);
   const [size, setSize] = useState(splashframe.variants[0].size);
   const [quantity, setQuantity] = useState(1);
   useEffect(() => {
     setVariant(splashframe.variants.filter((v) => v.size === size)[0]);
   }, [size]);
-
-  const cartItemsQuery = useCartItems();
-  const cartItems = cartItemsQuery.data || [];
-
-  const [isInCartItems, setIsInCartItems] = useState(false);
-  useEffect(() => {
-    cartItems &&
-      setIsInCartItems(
-        _.some(
-          cartItems,
-          (c) =>
-            c.splashframe_id === splashframe.id && c.variant_id === variant.id
-        )
-      );
-  }, [splashframe, variant, cartItems]);
 
   const sizeOptions = useMemo(
     () =>
@@ -103,89 +87,21 @@ export function AddToCartForm({ splashframe }: AddToCartFormProps) {
         </div>
       </div>
       <div>
-        {isInCartItems ? (
-          <PatchCartItemButton
-            id={
-              cartItems.filter(
-                (c) =>
-                  c.splashframe_id === splashframe.id &&
-                  c.variant_id === variant.id
-              )[0].id
-            }
-            data={{
-              json_merge_patch: {
-                quantity:
-                  cartItems.filter(
-                    (c) =>
-                      c.splashframe_id === splashframe.id &&
-                      c.variant_id === variant.id
-                  )[0].quantity + quantity,
+        <button
+          className="h-12 bg-gray-500 text-white rounded w-full max-w-[345px] hover:ring-1 ring-gray-500 duration-200 flex justify-center items-center"
+          onClick={() =>
+            addToCartMutation.trigger({
+              data: {
+                splashframe_id: splashframe.id,
+                variant_id: variant.id,
+                quantity,
               },
-            }}
-          >
-            Add to Cart
-          </PatchCartItemButton>
-        ) : (
-          <CreateCartItemButton
-            data={{
-              splashframe_id: splashframe.id,
-              variant_id: variant.id,
-              quantity,
-            }}
-          >
-            Add to cart
-          </CreateCartItemButton>
-        )}
+            })
+          }
+        >
+          {addToCartMutation.isMutating ? <Spinner size="sm" /> : "Add to cart"}
+        </button>
       </div>
     </div>
-  );
-}
-
-export interface CreateCartItemInput {
-  splashframe_id: Splashframe["id"];
-  variant_id: Variant["id"];
-  quantity: number;
-}
-interface CreateCartItemButtonProps {
-  data: CreateCartItemInput;
-  children: string;
-}
-function CreateCartItemButton({ data, children }: CreateCartItemButtonProps) {
-  const createCartItemMutation = useCreateCartItem({
-    successMsg: "Added to cart",
-  });
-
-  return (
-    <button
-      className="h-12 bg-gray-500 text-white rounded w-full max-w-[345px] hover:ring-1 ring-gray-500 duration-200 flex justify-center items-center"
-      onClick={() => createCartItemMutation.trigger({ data })}
-    >
-      {createCartItemMutation.isMutating ? <Spinner size="sm" /> : children}
-    </button>
-  );
-}
-
-interface PatchCartItemInput {
-  json_merge_patch: {
-    quantity?: number;
-  };
-}
-interface PatchCartItemButtonProps {
-  id: CartItem["id"];
-  data: PatchCartItemInput;
-  children: string;
-}
-function PatchCartItemButton({ id, data, children }: PatchCartItemButtonProps) {
-  const patchCartItemMutation = usePatchCartItem({
-    successMsg: "Added to cart",
-  });
-
-  return (
-    <button
-      className="h-12 bg-gray-500 text-white rounded w-full max-w-[345px] hover:ring-1 ring-gray-500 duration-200 flex justify-center items-center"
-      onClick={() => patchCartItemMutation.trigger({ id, data })}
-    >
-      {patchCartItemMutation.isMutating ? <Spinner size="sm" /> : children}
-    </button>
   );
 }
