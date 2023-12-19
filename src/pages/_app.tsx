@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ProgressBar />
       <AnnouncementBanner />
       <NavBar />
-      <main className="max-w-screen-laptop mx-auto px-[4vw] pb-24 pt-4 min-h-[80vh]">
+      <main className="max-w-screen-laptop mx-auto px-[4vw] pb-24 pt-4 min-h-[100vh]">
         <Component {...pageProps} />
       </main>
       <Footer />
