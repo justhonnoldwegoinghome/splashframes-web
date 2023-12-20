@@ -23,10 +23,7 @@ export default function Page({ splashframe }: { splashframe: Splashframe }) {
         <meta property="og:title" content={splashframe.title} />
         <meta property="og:type" content="product" />
         <meta property="og:description" content={splashframe.description} />
-        <meta
-          property="og:image"
-          content="https://api.splashframes.com/1/static/images/space_8.jpg"
-        />
+        <meta property="og:image" content={splashframe.image_urls[0]} />
         <meta property="og:image:width" content="1024" />
         <meta property="og:image:height" content="1024" />
       </Head>
