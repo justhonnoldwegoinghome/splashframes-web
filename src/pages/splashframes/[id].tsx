@@ -18,7 +18,7 @@ export default function Page({ splashframe }: { splashframe: Splashframe }) {
         <meta property="og:site_name" content="Splashframes" />
         <meta
           property="og:url"
-          content={`https://shop.splashframes.com/images/${splashframe.id}`}
+          content={`https://shop.splashframes.com/splashframes/${splashframe.id}`}
         />
         <meta property="og:title" content={splashframe.title} />
         <meta property="og:type" content="product" />
