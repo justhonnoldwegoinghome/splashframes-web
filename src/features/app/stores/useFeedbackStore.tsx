@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export interface Feedback {
+interface Feedback {
   msg: string;
   status: "success" | "error";
 }

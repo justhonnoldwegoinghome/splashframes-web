@@ -1,7 +1,7 @@
 import _ from "lodash";
 import useSWRMutation from "swr/mutation";
 
-import { useFeedbackStore } from "@/stores/useFeedbackStore";
+import { useFeedbackStore } from "@/features/app";
 
 import { getCartItems } from "./getCartItems";
 import { CartItem } from "../types";

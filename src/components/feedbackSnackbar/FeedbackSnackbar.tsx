@@ -1,7 +1,7 @@
 import { PiCheckCircleFill } from "react-icons/pi";
 import { useEffect } from "react";
 
-import { useFeedbackStore } from "@/stores/useFeedbackStore";
+import { useFeedbackStore } from "@/features/app";
 
 const FEEDBACK_DURATION = 4000;
 
