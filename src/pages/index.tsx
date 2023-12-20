@@ -16,7 +16,7 @@ export default function Page() {
         <meta property="og:type" content="product" />
         <meta
           property="og:description"
-          content="Stunning AI-generated canvas art."
+          content="Redefine your surroundings with captivating images that seamlessly blend creativity and technology. Explore now and bring the enchantment of AI art to your walls!"
         />
         <meta property="og:image" content="/logo.png" />
       </Head>
