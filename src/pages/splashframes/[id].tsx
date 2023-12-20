@@ -14,6 +14,16 @@ export default function Page({ splashframe }: { splashframe: Splashframe }) {
       <Head>
         <title>{`${splashframe.title} - Splashframes`}</title>
         <meta name="description" content={splashframe.description} />
+
+        <meta property="og:site_name" content="Splashframes" />
+        <meta
+          property="og:url"
+          content={`https://shop.splashframes.com/images/${splashframe.id}`}
+        />
+        <meta property="og:title" content={splashframe.title} />
+        <meta property="og:type" content="product" />
+        <meta property="og:descriptioin" content={splashframe.description} />
+        <meta property="og:image" content={splashframe.image_urls[0]} />
       </Head>
       <div>
         <div className="flex gap-12 flex-wrap">

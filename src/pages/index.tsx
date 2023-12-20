@@ -7,6 +7,18 @@ export default function Page() {
     <>
       <Head>
         <title>Splashframes</title>
+        <meta property="og:site_name" content="Splashframes" />
+        <meta
+          property="og:url"
+          content="https://shop.splashframes.com/images"
+        />
+        <meta property="og:title" content="Splashframes" />
+        <meta property="og:type" content="product" />
+        <meta
+          property="og:descriptioin"
+          content="Stunning AI-generated canvas art."
+        />
+        <meta property="og:image" content="/logo.png" />
       </Head>
       <div>
         <SplashframeCards />
