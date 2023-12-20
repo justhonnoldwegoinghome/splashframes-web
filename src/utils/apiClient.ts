@@ -17,3 +17,16 @@ export async function get<T>(
 ): Promise<T> {
   return axiosInstance.get<T>(url, config).then(defaultResponseHandler);
 }
+
+export async function post<T>(
+  url: string,
+  data: any,
+  config: AxiosRequestConfig = {}
+): Promise<AxiosResponse<T>> {
+  return axiosInstance.post<T>(url, data, {
+    ...config,
+    headers: {
+      ...config.headers,
+    },
+  });
+}

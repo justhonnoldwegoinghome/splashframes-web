@@ -1,5 +1,16 @@
-import { ImagesPage } from "@/features/images";
+import Head from "next/head";
+
+import { SplashframeCards } from "@/features/splashframes";
 
 export default function Page() {
-  return <ImagesPage />;
+  return (
+    <>
+      <Head>
+        <title>Splashframes</title>
+      </Head>
+      <div>
+        <SplashframeCards />
+      </div>
+    </>
+  );
 }

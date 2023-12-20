@@ -1,6 +1,8 @@
-import { Image } from "@/features/images";
+import { Splashframe, Variant } from "@/features/splashframes";
 
 export interface CartItem {
-  id: Image["id"];
+  id: string;
+  splashframe_id: Splashframe["id"];
+  variant_id: Variant["id"];
   quantity: number;
 }
