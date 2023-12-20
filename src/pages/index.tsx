@@ -15,7 +15,7 @@ export default function Page() {
         <meta property="og:title" content="Splashframes" />
         <meta property="og:type" content="product" />
         <meta
-          property="og:descriptioin"
+          property="og:description"
           content="Stunning AI-generated canvas art."
         />
         <meta property="og:image" content="/logo.png" />
