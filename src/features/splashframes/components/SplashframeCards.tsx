@@ -46,7 +46,7 @@ export function SplashframeCards({ ids_filter }: SplashframeCardsProps) {
 
   return (
     <div>
-      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-8 tablet:gap-12 laptop:gap-16">
+      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-4 tablet:gap-12 laptop:gap-16">
         {splashframes.map((s, i) => (
           <div
             ref={i === splashframes.length - 1 ? ref : undefined}
