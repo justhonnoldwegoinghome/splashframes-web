@@ -4,7 +4,7 @@ import Link from "next/link";
 export function Footer() {
   return (
     <div className="border-t">
-      <div className="max-w-screen-laptop mx-auto px-[4vw] py-24">
+      <div className="max-w-screen-laptop mx-auto px-[5vw] py-24">
         <div className="flex flex-col items-center justify-between tablet:flex-row-reverse gap-12 flex-wrap text-gray-500">
           <div className="flex gap-12 flex-wrap">
             {footerItems.map(({ label, links }) => (

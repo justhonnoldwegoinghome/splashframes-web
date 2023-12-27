@@ -79,7 +79,7 @@ function SplashframeModal({
           >
             <Dialog.Panel className="transition-all bg-white w-full rounded-t-lg">
               <div className="py-4 border-b">
-                <div className="max-w-screen-laptop mx-auto px-[4vw]">
+                <div className="max-w-screen-laptop mx-auto px-[5vw]">
                   <button
                     onClick={closeModal}
                     className="text-sm text-secondary flex items-center gap-1 hover:text-black outline-none"
@@ -90,7 +90,7 @@ function SplashframeModal({
                 </div>
               </div>
               <div className="overflow-auto max-h-[95vh] pt-[4vh] pb-60">
-                <div className="max-w-screen-laptop mx-auto px-[4vw] min-h-[100vh]">
+                <div className="max-w-screen-laptop mx-auto px-[5vw] min-h-[100vh]">
                   <SplashframePage splashframe={splashframe} />
                 </div>
               </div>

@@ -65,7 +65,7 @@ export function AddToCartForm({ splashframe }: AddToCartFormProps) {
       <div>
         <Link
           href={`/splashframes/${splashframe.id}`}
-          className="text-3xl mb-2 hover:text-sauce duration-200"
+          className="text-2xl mb-2 hover:text-sauce duration-200"
         >
           {splashframe.title}
         </Link>
