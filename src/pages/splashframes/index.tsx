@@ -1,14 +1,8 @@
 import Head from "next/head";
 
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { SplashframeCards } from "@/features/splashframes";
 
 export default function Page() {
-  const { push } = useRouter();
-  useEffect(() => {
-    push("/splashframes");
-  }, []);
-
   return (
     <>
       <Head>
@@ -26,6 +20,9 @@ export default function Page() {
           content="https://api.splashframes.com/static/images/space_8.jpg"
         />
       </Head>
+      <div>
+        <SplashframeCards />
+      </div>
     </>
   );
 }
