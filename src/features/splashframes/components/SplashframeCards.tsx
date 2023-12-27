@@ -1,9 +1,9 @@
 import _ from "lodash";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import Link from "next/link";
 
 import { IdsFilter, useSplashframesInfinite } from "../api/getSplashframes";
+import { SplashframeCard } from "./SplashframeCard";
 
 /* 
 There are two options for choosing which element to place `ref` on:
@@ -32,7 +32,7 @@ export function SplashframeCards({ ids_filter }: SplashframeCardsProps) {
 
   if (!splashframesQuery.data)
     return (
-      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-8 tablet:gap-12 laptop:gap-16">
+      <div className="grid grid-cols-2 tablet:grid-cols-4 gap-8 tablet:gap-12 laptop:gap-16">
         {Array.from(Array(24).keys()).map((i) => (
           <div
             key={i}
@@ -46,21 +46,10 @@ export function SplashframeCards({ ids_filter }: SplashframeCardsProps) {
 
   return (
     <div>
-      <div className="grid grid-cols-2 tablet:grid-cols-3 laptop:grid-cols-4 gap-4 tablet:gap-12 laptop:gap-16">
+      <div className="grid grid-cols-2 tablet:grid-cols-4 gap-8 tablet:gap-12 laptop:gap-16">
         {splashframes.map((s, i) => (
-          <div
-            ref={i === splashframes.length - 1 ? ref : undefined}
-            key={s.id}
-            className="bg-white p-1 hover:p-0 duration-300 rounded tablet:rounded-xl"
-          >
-            <div className="hover:shadow-[0_5px_10px_rgba(0,0,0,0.1)] duration-300 rounded tablet:rounded-xl">
-              <Link href={`/splashframes/${s.id}`}>
-                <img
-                  src={s.image_urls[0]}
-                  className="rounded tablet:rounded-xl"
-                />
-              </Link>
-            </div>
+          <div ref={i === splashframes.length - 1 ? ref : undefined} key={s.id}>
+            <SplashframeCard splashframe={s} />
           </div>
         ))}
       </div>

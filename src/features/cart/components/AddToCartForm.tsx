@@ -6,6 +6,7 @@ import { Spinner } from "@/components/spinner";
 import { Splashframe, Variant } from "@/features/splashframes";
 
 import { useAddToCart } from "../api/addToCart";
+import Link from "next/link";
 
 export interface CreateCartItemInput {
   splashframe_id: Splashframe["id"];
@@ -62,9 +63,16 @@ export function AddToCartForm({ splashframe }: AddToCartFormProps) {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-3xl mb-2">{splashframe.title}</h1>
+        <Link
+          href={`/splashframes/${splashframe.id}`}
+          className="text-3xl mb-2 hover:text-sauce duration-200"
+        >
+          {splashframe.title}
+        </Link>
         <p className="text-gray-500 mb-8">{splashframe.description}</p>
-        <p className="text-xl">{`$${variant.price_usd * quantity} USD`}</p>
+        <p className="text-xl text-gray-500">{`$${
+          variant.price_usd * quantity
+        } USD`}</p>
       </div>
       <div className="flex flex-col gap-6">
         <div>
