@@ -23,7 +23,7 @@ export default function Page() {
         <meta property="og:description" content="Splashframes" />
         <meta
           property="og:image"
-          content="https://api.splashframes.com/static/images/space_8.jpg"
+          content="https://api.splashframes.com/static/images/galactic-gaze.jpg"
         />
       </Head>
     </>
